@@ -35,7 +35,6 @@ const Login = () => {
         password.current.value
       )
       .then((userCredential) =>{
-        console.log("created user =",userCredential.user)
          updateProfile(userCredential.user, {
           displayName: name.current.value,
           photoURL: 'https://avatars.githubusercontent.com/u/34466733?v=4',
@@ -63,7 +62,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
         })
         .catch((error) => {
           const errorMessage = error.message;

@@ -36,7 +36,7 @@ const Header = () => {
     
   }
   return (
-    <div className='absolute flex items-center justify-between px-8 w-full bg-gradient-to-b from-slate-100'>
+    <div className='absolute flex items-center justify-between px-8 w-full bg-gradient-to-b from-white z-10'>
       <img className='h-32' src='/assets/logo_prime.svg' alt='logo' />
       {user && <button onClick={()=>handleSignout()} className='flex items-center'>
         <img
@@ -44,7 +44,7 @@ const Header = () => {
           src={user?.photoURL?user?.photoURL:'/assets/account_circle.svg'}
           alt='user'
         />
-        <span className='font-semibold text-lg'>Sign Out</span>
+        <span className='font-semibold text-lg text-white'>Sign Out</span>
       </button>}
     </div>
   );

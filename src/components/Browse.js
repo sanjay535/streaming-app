@@ -1,9 +1,14 @@
 import Header from './Header'
+import MainVideoContainer from './MainVideoContainer'
+import VideoListsContainer from './VideoListsContainer';
 
 const Browse = () => {
+  
   return (
-    <div>
+    <div className='overflow-x-hidden'>
       <Header/>
+      <MainVideoContainer/>
+      <VideoListsContainer/>
     </div>
   )
 }
