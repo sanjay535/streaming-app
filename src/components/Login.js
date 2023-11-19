@@ -1,12 +1,20 @@
 import { useRef, useState } from 'react';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
 import { validateData } from '../utils/validate';
 import { auth } from '../utils/firebase-config';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
 
 const Login = () => {
   const [isLoggedInForm, setIsLoggedInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
@@ -16,28 +24,51 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrorMessage('');
-    const validateResult = validateData(
-      email.current.value,
-      password.current.value
-    );
-    if (!validateResult) {
-      // signin
-      if (isLoggedInForm) {
-        createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user);
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            setErrorMessage(errorMessage+'-'+errorCode)
-          });
-      } else {
-        // signup
-      }
+    const message = validateData(email.current.value, password.current.value);
+    setErrorMessage(message);
+    if (message) return;
+
+    if (!isLoggedInForm) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+      .then((userCredential) =>{
+        console.log("created user =",userCredential.user)
+         updateProfile(userCredential.user, {
+          displayName: name.current.value,
+          photoURL: 'https://avatars.githubusercontent.com/u/34466733?v=4',
+        }).then(() => {
+          const { uid, displayName, email,photoURL } = auth.currentUser;
+          dispatch(addUser({ uid, displayName, email,photoURL, from:'Profile Update' }));
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage + '-' + errorCode);
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMessage(errorMessage + '-' + errorCode);
+      });
     } else {
-      setErrorMessage(validateResult);
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          setErrorMessage(errorMessage + ' ' + 'Error during SingIn');
+        });
     }
   };
   const handlePasswordVisibility = () => {
@@ -84,7 +115,7 @@ const Login = () => {
           ></span>
         </div>
 
-        <p className='text-red-600 text-lg font-bold'>{errorMessage}</p>
+        <p className='text-red-600 text-lg font-bold w-80'>{errorMessage}</p>
         <button className='p-4 my-6 bg-[#00A8E1] rounded-lg w-80 text-white text-2xl font-bold'>
           {isLoggedInForm ? 'Sign In' : 'Sign Up'}
         </button>
