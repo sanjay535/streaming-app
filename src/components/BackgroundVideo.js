@@ -11,6 +11,7 @@ const BackgroundVideo = ({movieId}) => {
         title='YouTube video player'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
       ></iframe>
+      {/* <div className='absolute w-full bg-white h-24 top-0'></div> */}
     </div>
   );
 };

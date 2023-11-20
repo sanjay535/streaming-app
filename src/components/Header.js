@@ -36,11 +36,11 @@ const Header = () => {
     
   }
   return (
-    <div className='absolute flex items-center justify-between px-8 w-full bg-gradient-to-b from-white z-10'>
-      <img className='h-32' src='/assets/logo_prime.svg' alt='logo' />
+    <div className='absolute flex items-center justify-between p-8 px-20 z-10 w-full bg-gradient-to-b from-black'>
+      <img className='h-14' src='/assets/amazon-prime-video-logo.svg' alt='logo' />
       {user && <button onClick={()=>handleSignout()} className='flex items-center'>
         <img
-          className='h-16 mx-2 rounded-full'
+          className='h-10 mx-2 rounded-full'
           src={user?.photoURL?user?.photoURL:'/assets/account_circle.svg'}
           alt='user'
         />
