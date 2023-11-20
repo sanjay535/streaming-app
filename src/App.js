@@ -4,6 +4,7 @@ import Browse from './components/Browse';
 import { Provider } from 'react-redux';
 import { appStore } from './utils/appStore';
 import Error from './components/Error';
+import { Example } from './components/Example';
 
 const appRouter = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const appRouter = createBrowserRouter([
   {
     path: '/error',
     element: <Error />,
+  },
+  {
+    path: '/example',
+    element: <Example />,
   },
 ]);
 function App() {
