@@ -6,10 +6,10 @@ import { addMovieTrailer } from '../movieSlice';
 const useMovieWithId = (movieId) => {
   const dispatch=useDispatch();   
   useEffect(() => {
-    fetchMovies();
-  }, []);
+    fetchMovies(movieId);
+  }, [movieId]);
 
-  const fetchMovies = async () => {
+  const fetchMovies = async (movieId) => {
     const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`;
     try {
       const data = await fetch(url, API_OPTION);

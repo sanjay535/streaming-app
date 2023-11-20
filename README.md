@@ -4,9 +4,11 @@
  - MainVideoContainer
    - VideoTitle
    - BackgroundVideo
+    - VolumeControl
 
  - VideoListsContainer  
    - PopularVideoList
      - n * VideoCard
    - TrendingVideoList
      - n * VideoCard
+ - Footer     
