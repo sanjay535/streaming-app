@@ -1,3 +1,4 @@
+import Footer from './Footer';
 import Header from './Header'
 import MainVideoContainer from './MainVideoContainer'
 import VideoListsContainer from './VideoListsContainer';
@@ -9,6 +10,7 @@ const Browse = () => {
       <Header/>
       <MainVideoContainer/>
       <VideoListsContainer/>
+      <Footer/>
     </div>
   )
 }
