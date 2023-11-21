@@ -1,6 +1,8 @@
-import React from 'react';
+import { useSelector } from 'react-redux';
 
 const VideoTitle = ({ title, overview }) => {
+  const isPlayerReady=useSelector(store=>store.player.isYTPlayerReady);
+  if(!isPlayerReady) return;
   return (
     <div className='absolute w-full text-white pt-40 pl-20 bg-gradient-to-r from-slate-700 aspect-video'>
       <h1 className='py-6 text-3xl font-bold'>{title}</h1>

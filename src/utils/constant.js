@@ -8,3 +8,21 @@ export const API_OPTION = {
 };
 
 export const IMG_MOVIE_URL='https://image.tmdb.org/t/p/w200'
+export const stateNames = {
+  '-1': 'unstarted',
+  0: 'ended',
+  1: 'playing',
+  2: 'paused',
+  3: 'buffering',
+  5: 'video cued',
+};
+
+export const playerVars={
+  autoplay:1,
+  enablejsapi:1, // enable Iframe API
+  mute:1,
+  loop:1,
+  rel:0, // hide related video
+  //controls:0, // remove video controls
+ fs:1
+}
