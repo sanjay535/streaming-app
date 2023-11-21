@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import youTubePlayer from 'youtube-player';
 
-export const Example = () => {
+ const YTPlayer = ({movieId}) => {
   const container = useRef(null);
+  const [isPlayerReady, setIsPlayerReady]=useState(false);
+  const dispatch=useDispatch();
   const [destroyPlayerPromise, setDestroyPlayerPromise]=useState(undefined);
   const [player, setPlayer] = useState(null);
   const stateNames = {
@@ -14,11 +17,13 @@ export const Example = () => {
     5: 'video cued',
   };
   useEffect(() => {
+    console.log('useEffect Called');
       createPlayer();
     return () => destroyPlayer();
-  }, []);
+  }, [movieId]);
 
   const destroyPlayer = () => {
+    console.log('destroyPlayer called')
     if (player) {
        player.destroy().then(() => {
         console.log('Player destroyed')
@@ -30,6 +35,7 @@ export const Example = () => {
 
   const createPlayer = () => {
     // do not attempt to create a player server-side, it won't work
+    console.log('createPlayer called');
     if (typeof document === 'undefined') return;
     if (destroyPlayerPromise) {
       // We need to first await the existing player to be destroyed before
@@ -40,21 +46,27 @@ export const Example = () => {
 
     // create player
     const player= youTubePlayer(container.current, {
-      videoId: 'M7lc1UVf-VE',
+      videoId: movieId,
       playerVars:{
         autoplay:1,
         enablejsapi:1, // enable Iframe API
         mute:1,
+        loop:1,
         rel:0, // hide related video
         //controls:0, // remove video controls
-        
+       fs:1
       }
     })
+    console.log('player=',player);
+    player.getIframe().then((iframe) => {
+       iframe.setAttribute('class', 'w-full h-full aspect-video');
+    })
+
     setPlayer(player)
-    console.log('player=',player)
 
     player.on('ready', function () {
       console.log('player is ready.');
+      setIsPlayerReady(true)
     });
     player.on('stateChange', function (event) {
       if (!stateNames[event.data]) {
@@ -78,10 +90,22 @@ export const Example = () => {
     })
   };
 
+  console.log('isPlayerReady=',isPlayerReady);
+ if(!isPlayerReady)
+ return (
+  <div className='w-full h-screen'>
+      <div id='iframe-container' className='w-full h-full'  ref={container}></div>
+    </div>
+ );
+
   return (
-    <div className='h-full'>
-        <div className='w-full aspect-video'  ref={container}></div>
-        <button onClick={()=>handleMute()}>Mute</button>
+    <div className='w-full h-full'>
+        <div id='iframe-container' className='w-full h-full'  ref={container}></div>
+        <button className='absolute z-20 top-[70%] left-[80%]' onClick={()=>handleMute()}>
+          <img className='' src='/assets/volume_up.svg' alt='play icon' />
+        </button>
       </div>
   );
 };
+
+export default YTPlayer;

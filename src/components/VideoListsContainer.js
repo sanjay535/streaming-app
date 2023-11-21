@@ -4,7 +4,7 @@ import PopularVideoList from './PopularVideoList'
 const VideoListsContainer = () => {
   return (
     <div className='w-screen bg-black pb-8'>
-      <div className='-mt-56 z-20 relative'>
+      <div className='-mt-40 z-20 relative'>
         <PopularVideoList title={'Now Playing'}/>
       </div>
       <PopularVideoList title={'Trending Movies in India Today'}/>

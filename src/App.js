@@ -4,7 +4,7 @@ import Browse from './components/Browse';
 import { Provider } from 'react-redux';
 import { appStore } from './utils/appStore';
 import Error from './components/Error';
-import { Example } from './components/Example';
+import YTPlayer from './components/YTPlayer';
 
 const appRouter = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ const appRouter = createBrowserRouter([
   },
   {
     path: '/example',
-    element: <Example />,
+    element: <YTPlayer/>,
   },
 ]);
 function App() {
