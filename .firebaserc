@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "kyc-project-8d24c"
-  }
+    "default": "kyc-project-8d24c",
+    "streaming-app": "streaming-app-93d64"
+  },
+  "targets": {},
+  "etags": {}
 }
