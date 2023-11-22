@@ -1,6 +1,6 @@
 # Streaming Application
 
- [Live Project link](https://streaming-app.web.app/)
+ [Live Project link](https://streaming-app-93d64.web.app/)
 
 ## / (Home Route)
  - Header
