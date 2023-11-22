@@ -1,5 +1,6 @@
-import Header from './Header';
+
 import Login from './Login';
+import Header from './shared/Header';
 
 const Body = () => {
   return (

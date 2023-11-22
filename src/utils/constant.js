@@ -23,6 +23,5 @@ export const playerVars={
   mute:1,
   loop:1,
   rel:0, // hide related video
-  //controls:0, // remove video controls
- fs:1
+  controls:0, // remove video controls
 }

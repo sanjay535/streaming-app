@@ -9,10 +9,15 @@ import { auth } from '../utils/firebase-config';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 
+const ButtonSpinner = () => (
+  <span className='ml-2 w-6 h-6 border-4 border-white border-b-[#00A8E1] rounded-full inline-block box-border animate-spin'></span>
+);
+
 const Login = () => {
   const [isLoggedInForm, setIsLoggedInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading]=useState(false);
   const dispatch = useDispatch();
 
   const email = useRef(null);
@@ -27,32 +32,41 @@ const Login = () => {
     const message = validateData(email.current.value, password.current.value);
     setErrorMessage(message);
     if (message) return;
-
+    setIsLoading(true);
     if (!isLoggedInForm) {
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
         password.current.value
       )
-      .then((userCredential) =>{
-         updateProfile(userCredential.user, {
-          displayName: name.current.value,
-          photoURL: 'https://avatars.githubusercontent.com/u/34466733?v=4',
-        }).then(() => {
-          const { uid, displayName, email,photoURL } = auth.currentUser;
-          dispatch(addUser({ uid, displayName, email,photoURL, from:'Profile Update' }));
+        .then((userCredential) => {
+          updateProfile(userCredential.user, {
+            displayName: name.current.value,
+            photoURL: 'https://avatars.githubusercontent.com/u/34466733?v=4',
+          })
+            .then(() => {
+              const { uid, displayName, email, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid,
+                  displayName,
+                  email,
+                  photoURL,
+                  from: 'Profile Update',
+                })
+              );
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              setErrorMessage(errorMessage + '-' + errorCode);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorMessage + '-' + errorCode);
-        });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setErrorMessage(errorMessage + '-' + errorCode);
-      });
+        }).finally(()=>setIsLoading(false));
     } else {
       signInWithEmailAndPassword(
         auth,
@@ -66,7 +80,7 @@ const Login = () => {
         .catch((error) => {
           const errorMessage = error.message;
           setErrorMessage(errorMessage + ' ' + 'Error during SingIn');
-        });
+        }).finally(()=>setIsLoading(false));
     }
   };
   const handlePasswordVisibility = () => {
@@ -114,8 +128,9 @@ const Login = () => {
         </div>
 
         <p className='text-red-600 text-lg font-bold w-80'>{errorMessage}</p>
-        <button className='p-4 my-6 bg-[#00A8E1] rounded-lg w-80 text-white text-2xl font-bold'>
+        <button className='p-4 my-6 flex items-center justify-center bg-[#00A8E1] rounded-lg w-80 text-white text-2xl font-bold'>
           {isLoggedInForm ? 'Sign In' : 'Sign Up'}
+          {isLoading && <ButtonSpinner/>}
         </button>
       </form>
       <p className='cursor-pointer' onClick={handleToggel}>

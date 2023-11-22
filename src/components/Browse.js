@@ -1,7 +1,7 @@
 import Footer from './Footer';
-import Header from './Header'
 import MainVideoContainer from './MainVideoContainer'
 import VideoListsContainer from './VideoListsContainer';
+import Header from './shared/Header';
 
 const Browse = () => {
   return (
