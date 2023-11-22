@@ -53,11 +53,15 @@ const useYTPlayer = (movieId,container) => {
         console.log('player is ready.');
         dispatch(updateIsYTPlayerReady(true))
       });
+
       player.on('stateChange', function (event) {
         if (!stateNames[event.data]) {
           throw new Error('Unknown state (' + event.data + ').');
         }
-  
+        console.log('EventData=',event);
+        if(event.data===0){
+            player.playVideo().then(()=>console.log("Re played..."))
+        }
         console.log(
           'State: ' + stateNames[event.data] + ' (' + event.data + ').'
         );
