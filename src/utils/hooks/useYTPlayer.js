@@ -52,6 +52,8 @@ const useYTPlayer = (movieId,container) => {
       player.on('ready', function () {
         console.log('player is ready.');
         dispatch(updateIsYTPlayerReady(true))
+        // setInterval(()=>{player.getCurrentTime().then(progress=>console.log(progress))},1000)
+        
       });
 
       player.on('stateChange', function (event) {
@@ -62,10 +64,15 @@ const useYTPlayer = (movieId,container) => {
         if(event.data===0){
             player.playVideo().then(()=>console.log("Re played..."))
         }
+        if(event.data===1){
+          player.getCurrentTime().then(progress=>console.log('currentTime=',progress))
+          player.getDuration().then(progress=>console.log('duration=',progress))
+        }
         console.log(
           'State: ' + stateNames[event.data] + ' (' + event.data + ').'
         );
       });
+    
     }
     return player
 }

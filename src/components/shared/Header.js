@@ -30,6 +30,7 @@ const Header = () => {
         navigate('/');
       }
     });
+
     return () => unsubscribe();
   }, []);
   const handleSignout = () => {
@@ -49,7 +50,7 @@ const Header = () => {
   }
 
   return (
-    <div className='absolute flex items-center justify-between p-8 px-20 z-10 w-full bg-gradient-to-b from-black'>
+    <div className='fixed flex items-center justify-between p-8 px-20 z-40 w-full bg-black'>
       <img
         className='h-14'
         src='/assets/amazon-prime-video-logo.svg'
@@ -67,12 +68,24 @@ const Header = () => {
       )} */}
 
       {user && <div class='relative inline-block text-left'>
-        <button onClick={() => toggleMenu(setShowMenu(!showMenu))} className=''>
+        <button onClick={() => toggleMenu(setShowMenu(!showMenu))} className='flex'>
+         
           <img
-            className='h-10 mx-2 rounded-full'
+            className='h-10 rounded-full'
             src={'/assets/account_circle.svg'}
             alt='user'
           />
+          {!showMenu?<img
+            className='h-10 rounded-full transition ease-linear delay-150'
+            src={'/assets/arrow_drop_down.svg'}
+            alt='user'
+          />:
+          <img
+            className='h-10 rounded-full transition ease-linear delay-150'
+            src={'/assets/arrow_drop_up.svg'}
+            alt='user'
+          />
+          }
         </button>
        
 

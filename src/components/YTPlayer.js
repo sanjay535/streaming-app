@@ -20,14 +20,16 @@ const YTPlayer = ({ movieId }) => {
 
   if (!isPlayerReady)
     return (
-      <div className='w-full h-screen'>
+      <div className='w-full h-screen bg-black after:w-12 after:h-12 after:border-4 after:border-white after:border-b-[#00A8E1] after:rounded-full after:inline-block after:box-border after:animate-spin'>
         <div
           id='iframe-container'
           className='w-full h-full'
           ref={container}
-        ></div>
+        >
+       </div>
       </div>
     );
+    
 
   return (
     <div className='w-full h-full'>
@@ -40,12 +42,12 @@ const YTPlayer = ({ movieId }) => {
         className='absolute z-20 top-[70%] left-[80%]'
         onClick={() => handleMute()}
       >
-        <img className='' src='/assets/volume_off.svg' alt='play icon' />
+        <img src='/assets/volume_off.svg' alt='volum off' />
       </button>:<button
         className='absolute z-20 top-[70%] left-[80%]'
         onClick={() => handleMute()}
       >
-        <img className='' src='/assets/volume_up.svg' alt='play icon' />
+        <img src='/assets/volume_up.svg' alt='volum on' />
       </button>}
 
     </div>

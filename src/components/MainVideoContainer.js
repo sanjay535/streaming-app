@@ -8,7 +8,6 @@ import { getRandomMovieTrailer } from '../utils/helper';
 const MainVideoContainer = () => {
   useNowPlayingMovies();
   const movies=useSelector(state=>state.movies.nowPlaying);
-  // console.log('movies=',movies)
   if(!movies)
   return (
     <div className='w-full bg-black flex items-center justify-center'>

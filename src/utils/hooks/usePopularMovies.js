@@ -14,7 +14,6 @@ const usePopularMovies = () => {
     try {
       const data = await fetch(url,API_OPTION);
       const json = await data.json();
-      console.log('popular Movies=',json.results);
       dispatch(addPopularMovies(json.results));
     } catch (error) {
       console.log(error);

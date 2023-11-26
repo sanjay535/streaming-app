@@ -14,7 +14,6 @@ const useMovieWithId = (movieId) => {
     try {
       const data = await fetch(url, API_OPTION);
       const json = await data.json();
-      console.log(json.results);
       const filterData=json.results?.filter(movie=>movie?.type==="Trailer")
       const trailer=filterData?.length?filterData[0]:json.results[0];
       dispatch(addMovieTrailer(trailer))

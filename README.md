@@ -1,6 +1,10 @@
 # Streaming Application
 
- [Live Project link](https://streaming-app.web.app/)
+ [Live Project link](https://streaming-app-93d64.web.app/)
+ 
+## Libraries
+ - (React, ReactDOM,JSX) & Tailwind, firebase(authentication), Redux, react-router-dom ,youtube-player, TMDB API
+
 
 ## / (Home Route)
  - Header

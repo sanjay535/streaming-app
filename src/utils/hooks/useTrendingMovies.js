@@ -14,7 +14,6 @@ const useTrendingMovies = () => {
     try {
       const data = await fetch(url,API_OPTION);
       const json = await data.json();
-      console.log(json.results);
       dispatch(addTrendingMovies(json.results));
     } catch (error) {
       console.log(error);

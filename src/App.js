@@ -21,11 +21,7 @@ const appRouter = createBrowserRouter([
     element: <Error />,
   },
   {
-    path: '/example',
-    element: <YTPlayer/>,
-  },
-  {
-    path: '/test',
+    path: 'watch/:movieId',
     element: <Test/>,
   },
 ]);
