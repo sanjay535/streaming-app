@@ -13,7 +13,7 @@ const BackgroundVideo = ({movieId}) => {
         title='YouTube video player'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
       ></iframe>} */}
-      {movieTrailer && <YTPlayer movieId={movieTrailer.key}/>}
+      {movieTrailer && <YTPlayer movieId={movieTrailer.key} muteValue={true}/>}
       
     </div>
   );

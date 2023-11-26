@@ -6,36 +6,21 @@ import { updateIsYTPlayerReady } from "../playerSlice";
 
 const useYTPlayer = (movieId,container) => {
     const dispatch=useDispatch();
-    const [destroyPlayerPromise, setDestroyPlayerPromise]=useState(undefined);
     const [player, setPlayer] = useState(null);
    
     useEffect(() => {
       console.log('useEffect Called');
         createPlayer();
-      return () => destroyPlayer();
+        
+      return () => player && player.destroy().then(() => {
+        console.log('Player destroyed')
+      })
     }, [movieId]);
-  
-    const destroyPlayer = () => {
-      console.log('destroyPlayer called')
-      if (player) {
-         player.destroy().then(() => {
-          console.log('Player destroyed')
-        });
-        setDestroyPlayerPromise(undefined);
-      }
-      return Promise.resolve();
-    };
-  
+
     const createPlayer = () => {
       // do not attempt to create a player server-side, it won't work
       console.log('createPlayer called');
       if (typeof document === 'undefined') return;
-      if (destroyPlayerPromise) {
-        // We need to first await the existing player to be destroyed before
-        // we can re-create it.
-        destroyPlayerPromise.then(createPlayer);
-        return;
-      }
   
       // create player
       const player= youTubePlayer(container.current, {
@@ -44,7 +29,7 @@ const useYTPlayer = (movieId,container) => {
       })
       console.log('player=',player);
       player.getIframe().then((iframe) => {
-         iframe.setAttribute('class', 'w-full h-full aspect-video');
+         iframe.setAttribute('class', 'w-full h-full aspect-square md:aspect-video');
       })
   
       setPlayer(player)

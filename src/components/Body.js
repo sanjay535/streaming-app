@@ -4,9 +4,16 @@ import Header from './shared/Header';
 
 const Body = () => {
   return (
-    <div className='bg-background bg-cover h-screen'>
+    <div className='w-screen h-screen'>
+      <img
+        className='w-screen h-screen fixed object-cover md:bg-cover'
+        src='/assets/bg2.jpg'
+        alt='background'
+      />
       <Header />
-      <Login />
+      <div className='flex justify-center'>
+       <Login />
+      </div>
     </div>
   );
 };

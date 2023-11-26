@@ -93,27 +93,27 @@ const Login = () => {
   };
 
   return (
-    <div className='absolute bg-white p-6 top-1/4 left-[40%] rounded-lg opacity-75'>
-      <h1 className='text-3xl'>{isLoggedInForm ? 'Sign In' : 'Sign Up'}</h1>
+    <div className='fixed top-[15%] md:top-[25%] bg-white p-6 rounded-lg opacity-75'>
+      <h1 className='text-xl md:text-3xl'>{isLoggedInForm ? 'Sign In' : 'Sign Up'}</h1>
       <form onSubmit={(e) => handleSubmit(e)} className='flex flex-col'>
         {!isLoggedInForm && (
           <input
             ref={name}
-            className='p-4 my-4 rounded-lg w-80 border border-[#00A8E1] outline-none'
+            className='p-4 my-4 rounded-lg md:w-80 border border-[#00A8E1] outline-none'
             type='text'
             placeholder='Full name'
           />
         )}
         <input
           ref={email}
-          className='p-4 my-4 rounded-lg w-80 border border-[#00A8E1] outline-none'
+          className='p-4 my-4 rounded-lg md:w-80 border border-[#00A8E1] outline-none'
           type='text'
           placeholder='Email address'
         />
         <div className='relative'>
           <input
             ref={password}
-            className='outline-none border border-[#00A8E1] p-4 my-4 rounded-lg w-80'
+            className='outline-none border md:w-80 border-[#00A8E1] p-4 my-4 rounded-lg w-72'
             type='password'
             placeholder='Password'
           />
@@ -121,14 +121,14 @@ const Login = () => {
             onClick={() => handlePasswordVisibility()}
             className={
               showPassword
-                ? 'after:absolute after:top-8 after:left-72 after:content-visibility after:inline-block after:h-[100%] after:w-[100%]'
-                : 'after:absolute after:top-8 after:left-72 after:content-visibility_off after:inline-block after:h-[100%] after:w-[100%]'
+                ? 'after:absolute after:top-8 after:left-64 md:after:left-72 after:content-visibility after:inline-block after:h-[100%] after:w-[100%]'
+                : 'after:absolute after:top-8 after:left-64 md:after:left-72 after:content-visibility_off after:inline-block after:h-[100%] after:w-[100%]'
             }
           ></span>
         </div>
 
-        <p className='text-red-600 text-lg font-bold w-80'>{errorMessage}</p>
-        <button className='p-4 my-6 flex items-center justify-center bg-[#00A8E1] rounded-lg w-80 text-white text-2xl font-bold'>
+        <p className='text-red-600 text-lg font-bold md:w-80'>{errorMessage}</p>
+        <button className='p-4 my-6 flex items-center justify-center bg-[#00A8E1] rounded-lg md:w-80 text-white text-lg md:text-2xl md:font-bold'>
           {isLoggedInForm ? 'Sign In' : 'Sign Up'}
           {isLoading && <ButtonSpinner/>}
         </button>

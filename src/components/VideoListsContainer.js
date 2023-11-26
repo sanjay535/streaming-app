@@ -14,7 +14,7 @@ const VideoListsContainer = () => {
   const trendingMovies = useSelector((store) => store.movies.trendingMovies);
   const upComingMovies = useSelector((store) => store.movies.upcomingingMovies);
   return (
-    <div className='w-screen bg-black pb-8'>
+    <div className='w-screen bg-black '>
       <div className='-mt-40 z-20 relative'>
         <MovieList title={'Now Playing'} movieList={nowPlaying}/>
       </div>

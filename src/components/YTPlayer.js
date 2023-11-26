@@ -7,7 +7,7 @@ const YTPlayer = ({ movieId }) => {
   const [isMuted, setIsMuted]=useState(true);
   const isPlayerReady = useSelector((store) => store.player.isYTPlayerReady);
   const player = useYTPlayer(movieId, container);
-
+  
   const handleMute = () => {
     player.isMuted().then((value) => {
       if (value) {
@@ -39,15 +39,15 @@ const YTPlayer = ({ movieId }) => {
         ref={container}
       ></div>
       {isMuted?<button
-        className='absolute z-20 top-[70%] left-[80%]'
+        className='absolute top-[20%] left-[70%] z-20 md:top-[70%] md:left-[80%]'
         onClick={() => handleMute()}
       >
-        <img src='/assets/volume_off.svg' alt='volum off' />
+        <img className='w-[60%] md:w-[100%]' src='/assets/volume_off.svg' alt='volum off' />
       </button>:<button
-        className='absolute z-20 top-[70%] left-[80%]'
+        className='absolute top-[20%] left-[70%] z-20 md:top-[70%] md:left-[80%]'
         onClick={() => handleMute()}
       >
-        <img src='/assets/volume_up.svg' alt='volum on' />
+        <img className='w-[60%] md:w-[100%]' src='/assets/volume_up.svg' alt='volum on' />
       </button>}
 
     </div>

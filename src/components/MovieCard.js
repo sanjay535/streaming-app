@@ -1,6 +1,5 @@
 import React from 'react'
 import { IMG_MOVIE_URL } from '../utils/constant'
-import { Link } from 'react-router-dom'
 
 const MovieCard = ({poster, movieId}) => {
   if(!poster)
@@ -11,7 +10,7 @@ const MovieCard = ({poster, movieId}) => {
   )
   return (
     <div className='flex-shrink-0 mr-3 opacity-90 hover:opacity-100'>
-       <Link to={'/watch/'+movieId}> <img className='w-[218px] h-[290px] rounded-lg' src={IMG_MOVIE_URL+poster} alt='Movie Poster' /></Link>
+       <a href={'/watch/'+movieId}> <img className='w-[118px] h-[190] md:w-[218px] md:h-[290px] rounded-lg' src={IMG_MOVIE_URL+poster} alt='Movie Poster' /></a>
     </div>
   )
 }
